@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  if movies.length
+    each m in movies
+      .movie
+        h3= m.name
+
+        if m.image
+          img(src=m.image width="200")
+
+        p #{m.year} • #{m.genres}
+        p Rating: #{m.rating}
+
+        a(href=`/movies/${m._id}`) Details
+        |  
+        a(href=`/movies/${m._id}/edit`) Edit
+
+        form(id=`del-${m._id}` action=`/movies/${m._id}/delete` method="post" style="display:inline")
+          button(type="button" onclick=`confirmDelete('del-${m._id}')`) Delete
+  else
+    p No movies yet.

@@ -1,0 +1,24 @@
+extends layout
+block content
+  if errors
+    ul.err
+      each e in errors
+        li #{e}
+  form(action="/movies/add" method="post")
+    div
+      label(for="name") Name:
+      input(type="text" name="name" id="name" value=movie.name)
+    div
+      label(for="year") Year:
+      input(type="number" name="year" id="year" value=movie.year)
+    div
+      label(for="genres") Genres (comma separated):
+      input(type="text" name="genres" id="genres" value=(movie.genres && movie.genres.join(', ')))
+    div
+      label(for="rating") Rating (0-10):
+      input(type="number" name="rating" id="rating" step="0.1" value=movie.rating)
+    div
+      label(for="description") Description:
+      textarea(name="description" id="description")= movie.description
+    div
+      button(type="submit") Add Movie

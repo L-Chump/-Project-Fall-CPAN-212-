@@ -1,0 +1,8 @@
+extends layout
+block content
+  .card
+    p This is a simple Movies app for CPAN 212 final project.
+    if currentUser
+      p.small Logged in as #{currentUser.username}
+    else
+      p.small You are not logged in.

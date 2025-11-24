@@ -1,0 +1,13 @@
+// models/Movie.js
+const mongoose = require('mongoose');
+
+const movieSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  description: { type: String, required: true },
+  year: { type: Number, required: true },
+  genres: { type: String, required: true }, // simple string (ex: "Horror, Action")
+  rating: { type: Number, required: true, min: 1, max: 10 },
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' } // who posted it
+});
+
+module.exports = mongoose.model('Movie', movieSchema);
