@@ -1,0 +1,18 @@
+extends layout
+block content
+  if errors
+    ul.err
+      each e in errors
+        li #{e}
+  form(action="/register" method="post")
+    div
+      label(for="username") Username:
+      input(type="text" name="username" id="username" value=(form && form.username))
+    div
+      label(for="password") Password:
+      input(type="password" name="password" id="password")
+    div
+      label(for="password2") Confirm Password:
+      input(type="password" name="password2" id="password2")
+    div
+      button(type="submit") Register
