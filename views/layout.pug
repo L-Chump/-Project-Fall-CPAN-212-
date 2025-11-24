@@ -7,7 +7,7 @@ html
     style.
       body { font-family: Arial, Helvetica, sans-serif; margin: 20px; }
       nav a { margin-right: 8px; }
-      .card { border: 1px solid #ddd; padding: 10px; margin: 10px 0; border-radius: 5px;}
+      .card { border: 1px solid #ddddddff; padding: 10px; margin: 10px 0; border-radius: 5px;}
       .err { color: darkred; }
   body
     header
@@ -25,7 +25,6 @@ html
     hr
     block content
     script.
-      // small helper for delete confirmation
       function confirmDelete(formId) {
         if (confirm('Delete this movie?')) {
           document.getElementById(formId).submit();

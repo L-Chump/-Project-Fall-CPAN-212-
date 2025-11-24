@@ -10,7 +10,7 @@ block content
         button(type="button" onclick=`confirmDelete('del(detail)')`) Delete
     hr
     // simple JS button to show "movie recipe" (we display JSON details)
-    button(id="showRecipe") Show movie data (recipe)
+    button(id="showRecipe") movie data (recipe)
     pre(id="recipe" style="display:none; background:#f6f6f6; padding:10px;")
       | #{JSON.stringify(movie, null, 2)}
     script.
