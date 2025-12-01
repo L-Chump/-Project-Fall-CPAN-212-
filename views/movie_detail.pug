@@ -1,20 +1,39 @@
-extends layout
-block content
-  .card
-    h2 #{movie.name} (#{movie.year})
-    p.small Genres: #{movie.genres.join(', ')} | Rating: #{movie.rating || 'N/A'}
-    p #{movie.description}
-    if currentUser && movie.owner && currentUser._id == movie.owner
-      a(href=`/movies/${movie._id}/edit`) Edit
-      form#del(detail)(action=`/movies/${movie._id}/delete` method="post" style="display:inline")
-        button(type="button" onclick=`confirmDelete('del(detail)')`) Delete
-    hr
-    // simple JS button to show "movie recipe" (we display JSON details)
-    button(id="showRecipe") movie data (recipe)
-    pre(id="recipe" style="display:none; background:#f6f6f6; padding:10px;")
-      | #{JSON.stringify(movie, null, 2)}
-    script.
-      document.getElementById('showRecipe').addEventListener('click', function() {
-        var pr = document.getElementById('recipe');
-        pr.style.display = pr.style.display === 'none' ? 'block' : 'none';
-      });
+html
+  head
+    title= movie.name
+    style.
+      body { font-family: Arial; background: #f2f2f2; margin: 0; }
+      header { background: #333; padding: 15px; }
+      header h1 { color: white; margin: 0; }
+      nav ul { list-style: none; display: flex; gap: 15px; padding: 0; }
+      nav a { color: white; text-decoration: none; }
+      main { padding: 20px; }
+      .button {
+        padding: 10px 15px;
+        background: #4caf50;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+      }
+      .danger {
+        background: #e53935;
+      }
+  body
+    header
+      h1= movie.name
+      nav
+        ul
+          li: a(href="/movies") Back to Movies
+
+    main
+      p Description: #{movie.description}
+      p Year: #{movie.year}
+      p.small Genres: #{Array.isArray(movie.genres) ? movie.genres.join(', ') : movie.genres || 'N/A'} 
+      p Rating: #{movie.rating}
+
+      br
+
+      a.button(href="/movies/" + movie._id + "/edit") Edit
+
+      form(method="POST" action="/movies/" + movie._id + "/delete" style="display:inline;")
+        button.danger(type="submit") Delete

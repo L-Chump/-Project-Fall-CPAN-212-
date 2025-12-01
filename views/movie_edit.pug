@@ -1,24 +1,47 @@
-extends layout
-block content
-  if errors
-    ul.err
-      each e in errors
-        li #{e}
-  form(action=`/movies/${movie._id}/edit` method="post")
-    div
-      label(for="name") Name:
-      input(type="text" name="name" id="name" value=movie.name)
-    div
-      label(for="year") Year:
-      input(type="number" name="year" id="year" value=movie.year)
-    div
-      label(for="genres") Genres:
-      input(type="text" name="genres" id="genres" value=(movie.genres && movie.genres.join(', ')))
-    div
-      label(for="rating") Rating (1-10 stars):
-      input(type="number" name="rating" id="rating" step="0.1" value=movie.rating)
-    div
-      label(for="description") Description:
-      textarea(name="description" id="description")= movie.description
-    div
-      button(type="submit") Save Changes
+html
+  head
+    title Edit Movie
+    style.
+      body { font-family: Arial; background: #f2f2f2; margin: 0; }
+      header { background: #333; padding: 15px; }
+      header h1 { color: white; margin: 0; }
+      nav ul { list-style: none; display: flex; gap: 15px; padding: 0; }
+      nav a { color: white; text-decoration: none; }
+      main { padding: 20px; }
+      input, textarea, button { padding: 10px; margin-top: 10px; width: 300px; }
+  body
+    header
+      h1 Edit Movie
+      nav
+        ul
+          li: a(href="/") Home
+          li: a(href="/movies") Movies
+
+    main
+      form(method="POST")
+        label Name:
+        br
+        input(type="text" name="name" value=movie.name)
+
+        br
+        label Description:
+        br
+        textarea(name="description")= movie.description
+
+        br
+        label Year:
+        br
+        input(type="number" name="year" value=movie.year)
+
+        br
+        label Genres:
+        br
+        input(type="text" name="genres" value=movie.genres.join(', '))
+
+        br
+        label Rating:
+        br
+        input(type="number" name="rating" min="0" max="10" value=movie.rating)
+
+        br
+        button(type="submit") Save Changes

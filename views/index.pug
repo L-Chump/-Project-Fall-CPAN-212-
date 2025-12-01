@@ -1,8 +1,46 @@
-extends layout
-block content
-  .card
-    p the Movie app for Project Fall 25
-    if currentUser
-      p.small Logged in as #{currentUser.username}
-    else
-      p.small You are not logged in.
+doctype html
+html
+  head
+    title Movie App
+    style.
+      body { 
+        margin: 0; 
+        padding: 0; 
+      }
+      header { background: #333; padding: 15px; }
+      header h1 { color: #fff; margin: 0; }
+      nav ul { list-style: none; padding: 0; margin: 10px 0; display: flex; gap: 15px; }
+      nav a { color: #fff; text-decoration: none; }
+      main { padding: 20px; }
+      .button {
+        background: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 4px;
+        text-decoration: none;
+        margin-top: 10px;
+      }
+  body
+    header
+      h1 Movie App
+      nav
+        ul
+          li: a(href="/") Home
+          li: a(href="/movies") Movies
+          if session && session.user
+            li: a(href="/logout") Logout
+          else
+            li: a(href="/login") Login
+            li: a(href="/register") Register
+
+    main
+      h2 Welcome!
+      p This is the homepage of your CPAN-212 final project.
+
+      if session && session.user
+        p You are logged in as #{session.user.username}
+        a.button(href="/movies") View Your Movies
+      else
+        a.button(href="/login") Login
+        |  or 
+        a.button(href="/register") Register

@@ -1,22 +1,36 @@
-extends layout
+html
+  head
+    title Movies
+    style.
+      body { font-family: Arial; background: #f2f2f2; margin: 0; }
+      header { background: #333; padding: 15px; }
+      header h1 { color: white; margin: 0; }
+      nav ul { list-style: none; padding: 0; display: flex; gap: 15px; }
+      nav a { color: white; text-decoration: none; }
+      main { padding: 20px; }
+      .movie-item {
+        background: white;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+      }
+      .button {
+        background: #4caf50;
+        padding: 8px 15px;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+      }
+  body
+    header
+      h1 All Movies
+      nav
+        ul
+          li: a(href="/") Home
+          li: a(href="/movies/add") Add Movie
 
-block content
-  if movies.length
-    each m in movies
-      .movie
-        h3= m.name
-
-        if m.image
-          img(src=m.image width="200")
-
-        p #{m.year} • #{m.genres}
-        p Rating: #{m.rating}
-
-        a(href=`/movies/${m._id}`) Details
-        |  
-        a(href=`/movies/${m._id}/edit`) Edit
-
-        form(id=`del-${m._id}` action=`/movies/${m._id}/delete` method="post" style="display:inline")
-          button(type="button" onclick=`confirmDelete('del-${m._id}')`) Delete
-  else
-    p No movies yet.
+    main
+      each movie in movies
+        .movie-item
+          h3: a(href="/movies/" + movie._id)= movie.name
+          p= movie.description
